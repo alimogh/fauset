@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(http-equiv="X-UA-Compatible", content="ie=edge")
+    title Settings
+  body
+    h1 Index
+    a(href="/auth/logout") Logout
+    div
+      -if(user)
+        ul
+          li=user.firstName
+          li=user.lastName
+          li=user.ip
+          li=user.balance
+          li=user.username
+          li=user.fhub_address
+

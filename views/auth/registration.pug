@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(http-equiv="X-UA-Compatible", content="ie=edge")
+    script(src="https://www.google.com/recaptcha/api.js" async)
+    title Registration
+    style.
+      form{
+          display: flex;
+          flex-direction: column;
+          align-content: center;
+      }
+      input, .recapcha {
+          flex: 0 0 20%;
+      }
+
+    - if (errors)
+        each val in errors
+          style(type="text/css").
+            input[name=#{val.param}] {
+                border: 1px solid red;
+            }
+
+
+  body
+    form(action="", method="post")
+      label(for='favoriteBook') firstName:
+      input#firstName(name="firstName", placeholder='firstName', type="text", value=form? form.firstName : '')
+      label(for='favoriteBook') lastName:
+      input#lastName(name="lastName", placeholder='lastName', type="text", value=form? form.lastName : '')
+      label(for='favoriteBook') username:
+      input#username(name="username", placeholder='username', type="text", value=form? form.username : '')
+      label(for='favoriteBook') fhub_address:
+      input#fhub_address(name="fhub_address", placeholder='fhub_address', type="text", value=form? form.fhub_address : '')
+      label(for='favoriteBook') password:
+      input#password(name="password", placeholder='password', type="password", value=form? form.password : '')
+      label(for='favoriteBook') confirmPassword:
+      input#confirmPassword(name="confirmPassword", placeholder='confirmPassword', type="password", value=form? form.confirmPassword : '')
+      div.recapcha(class="g-recaptcha", data-sitekey="6LeYbz4UAAAAAJ-BQ_i7ct3PqC-09Wa5paiZl56W")
+      input(type="submit", value="Registration")
+    - if (errors)
+      ul
+      each val in errors
+        li=val.message
