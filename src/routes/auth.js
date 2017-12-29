@@ -44,18 +44,21 @@ router.get("/login", NotMastBeLogin, async function (req, res, next) {
 });
 router.post("/registration", NotMastBeLogin, async function (req, res, next) {
   try {
-    req.checkBody('firstName', 'First anme can not be blank').notEmpty();
-    req.checkBody('lastName', 'Last anme can not be blank').notEmpty();
+    req.checkBody('firstName', 'First anme can not be blank').trim();
+    req.checkBody('lastName', 'Last anme can not be blank').trim();
     req.checkBody('username', 'Username can not be blank').notEmpty().isUnique().withMessage("Username already exists");
     req.checkBody('fhub_address', 'Fauset Hub address can not be blank').notEmpty().isFausetHubAddress().withMessage("Coin address does not belong to an account on FaucetHub.io, please make an account and link your address and try again.");
     req.checkBody('password', 'Password can not be blank').notEmpty().isLength({
       min: 5,
-      max: 12
-    }).withMessage('Beetwin 5-12');
+      max: 24
+    }).withMessage('Beetwin 5-24');
     req.checkBody('confirmPassword', 'Confirm Password can not be blank').notEmpty().isLength({
       min: 5,
-      max: 12
-    }).withMessage('Beetwin 5-12').equals(req.body.password).withMessage('Passwords do not match');
+      max: 24
+    }).withMessage('Beetwin 5-24').equals(req.body.password).withMessage('Passwords do not match');
+    if(req.body.referal){
+      req.checkBody("referal","Incorect referal code").trim().isMongoId();
+    }
     req.checkBody('g-recaptcha-response', 'reCAPTCHA error').isValidreCAPTCHA();
     await req.asyncValidationErrors(true);
     const user = new UserModel(req.body);
@@ -72,7 +75,15 @@ router.post("/registration", NotMastBeLogin, async function (req, res, next) {
 });
 router.get("/registration", NotMastBeLogin, async function (req, res, next) {
   try {
-    res.render('auth/registration');
+    if(req.query.referal){
+      req.checkQuery("referal","Incorect referal code").exists().trim().isMongoId();
+    }
+    if(req.validationErrors(true)){
+      console.log(req.validationErrors(true));
+      next();
+      return;
+    } 
+    res.render('auth/registration',{referal:req.query.referal || undefined});
   } catch (error) {
     next(error);
   }

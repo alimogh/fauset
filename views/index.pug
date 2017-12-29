@@ -4,7 +4,15 @@ html(lang="en")
     meta(charset="UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     meta(http-equiv="X-UA-Compatible", content="ie=edge")
-    title Index
+    script(src="/javascript/main.js")
+    title=user.username
   body
     h1 Index
+    h4=user.balance
     a(href="/auth/logout") Logout
+    form(action=baseUrl+"index/claim", method="post")
+      input#claim(type="submit", value="CLAIM")
+      input#time(type="hidden", name="time" value=user.lastClaim)
+    div#spendtime
+    -if(cantclaim)
+      span=cantclaim

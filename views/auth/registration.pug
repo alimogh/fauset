@@ -38,6 +38,8 @@ html(lang="en")
       input#password(name="password", placeholder='password', type="password", value=form? form.password : '')
       label(for='favoriteBook') confirmPassword:
       input#confirmPassword(name="confirmPassword", placeholder='confirmPassword', type="password", value=form? form.confirmPassword : '')
+      -if(referal || (form && form.referal))
+        input(type="hidden", name="referal", value=referal||form.referal)
       div.recapcha(class="g-recaptcha", data-sitekey="6LeYbz4UAAAAAJ-BQ_i7ct3PqC-09Wa5paiZl56W")
       input(type="submit", value="Registration")
     - if (errors)

@@ -7,8 +7,14 @@ import config from '../../config/config';
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-  firstName: String,
-  lastName: String,
+  firstName: {
+    type: String,
+    default: "User",
+  },
+  lastName: {
+    type: String,
+    default: "User",
+  },
   username: {
     type: String,
     index: true,
@@ -33,6 +39,11 @@ const UserSchema = new Schema({
   lastClaim: {
     type: Date,
     default: Date.now
+  },
+  referal:{
+    type: Schema.Types.ObjectId,
+    ref : "UserSchema",
+    default: null,
   },
   creatAt: {
     type: Date,

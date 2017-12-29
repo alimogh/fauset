@@ -9,7 +9,7 @@ export const passportLocalCallback = (req, username, password, done) => {
     }
     if (!user) {
       return done(null, false, {
-        message: 'Incorrect username.'
+        message: 'Incorrect credentials.'
       });
     }
     if (user.isRemove) {
@@ -19,7 +19,7 @@ export const passportLocalCallback = (req, username, password, done) => {
     }
     if (!user.validPassword(user.password, password)) {
       return done(null, false, {
-        message: 'Incorrect password.'
+        message: 'Incorrect credentials.'
       });
     }
     UserModel.findByIdAndUpdate(user._id, {

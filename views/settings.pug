@@ -17,4 +17,14 @@ html(lang="en")
           li=user.balance
           li=user.username
           li=user.fhub_address
+        span="Youre referal link is "+baseUrl+"auth/registration?referal="+user._id
+    div
+      -if(referals)
+        ul
+          li -------------------Referals users list-----------------
+          each referal in referals
+            li=referal.firstName+" "+user.lastName
+
+
+
 
