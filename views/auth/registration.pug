@@ -6,15 +6,8 @@ html(lang="en")
     meta(http-equiv="X-UA-Compatible", content="ie=edge")
     script(src="https://www.google.com/recaptcha/api.js" async)
     title Registration
-    style.
-      form{
-          display: flex;
-          flex-direction: column;
-          align-content: center;
-      }
-      input, .recapcha {
-          flex: 0 0 20%;
-      }
+    link(rel='stylesheet', href='/css/font-awesome.css')
+    link(rel='stylesheet', href='/css/login.css')
 
     - if (errors)
         each val in errors
@@ -25,24 +18,23 @@ html(lang="en")
 
 
   body
-    form(action="", method="post")
-      label(for='favoriteBook') firstName:
-      input#firstName(name="firstName", placeholder='firstName', type="text", value=form? form.firstName : '')
-      label(for='favoriteBook') lastName:
-      input#lastName(name="lastName", placeholder='lastName', type="text", value=form? form.lastName : '')
-      label(for='favoriteBook') username:
-      input#username(name="username", placeholder='username', type="text", value=form? form.username : '')
-      label(for='favoriteBook') fhub_address:
-      input#fhub_address(name="fhub_address", placeholder='fhub_address', type="text", value=form? form.fhub_address : '')
-      label(for='favoriteBook') password:
-      input#password(name="password", placeholder='password', type="password", value=form? form.password : '')
-      label(for='favoriteBook') confirmPassword:
-      input#confirmPassword(name="confirmPassword", placeholder='confirmPassword', type="password", value=form? form.confirmPassword : '')
-      -if(referal || (form && form.referal))
-        input(type="hidden", name="referal", value=referal||form.referal)
-      div.recapcha(class="g-recaptcha", data-sitekey="6LeYbz4UAAAAAJ-BQ_i7ct3PqC-09Wa5paiZl56W")
-      input(type="submit", value="Registration")
-    - if (errors)
-      ul
-      each val in errors
-        li=val.message
+    .login-page
+      .form
+        form.register-form(action="", method="post")
+          input#firstName(name="firstName", placeholder='firstName', type="text", value=form? form.firstName : '')
+          input#lastName(name="lastName", placeholder='lastName', type="text", value=form? form.lastName : '')
+          input#username(name="username", placeholder='username', type="text", value=form? form.username : '')
+          input#fhub_address(name="fhub_address", placeholder='fhub_address', type="text", value=form? form.fhub_address : '')
+          input#password(name="password", placeholder='password', type="password", value=form? form.password : '')
+          input#confirmPassword(name="confirmPassword", placeholder='confirmPassword', type="password", value=form? form.confirmPassword : '')
+          -if(referal || (form && form.referal))
+            input(type="hidden", name="referal", value=referal||form.referal)
+          div.recapcha(class="g-recaptcha", data-sitekey="6LeYbz4UAAAAAJ-BQ_i7ct3PqC-09Wa5paiZl56W")
+          button(type="submit") Registration
+        p.message
+          | Already registered?
+          a(href='/auth/login') Sign In
+        - if (errors)
+          ul
+            each val in errors
+              li=val.message

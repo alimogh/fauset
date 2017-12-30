@@ -5,25 +5,68 @@ html(lang="en")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     meta(http-equiv="X-UA-Compatible", content="ie=edge")
     title Settings
+    link(rel='stylesheet', href='/css/font-awesome.css')
+    link(rel='stylesheet', href='/css/main.css')
   body
-    h1 Index
-    a(href="/auth/logout") Logout
-    div
-      -if(user)
+    header
+      .header-menu
         ul
-          li=user.firstName
-          li=user.lastName
-          li=user.ip
-          li=user.balance
-          li=user.username
-          li=user.fhub_address
-        span="Youre referal link is "+baseUrl+"auth/registration?referal="+user._id
-    div
-      -if(referals)
-        ul
-          li -------------------Referals users list-----------------
-          each referal in referals
-            li=referal.firstName+" "+referal.lastName
+          li.dropdown
+            a(href='#')
+              span
+                i.fa.fa-user(aria-hidden='true')
+              =' ' + user.username + ' '
+              span.dropdown-icon
+                i.fa.fa-angle-down(aria-hidden='true')
+            ul
+              li
+                a(href='/index') Claim
+                a(href="/auth/logout") Logout
+    .main-container
+      .content-wrapper
+        .top-advertising
+        .about-block
+          .about-advertising
+            a.advertising(href='#')
+          .about-content.about-settings
+            .remaining
+              div
+                -if(user)
+                ul
+                  li='Name: ' + user.firstName + ' ' + user.lastName
+                  li='Username: ' + user.username
+                  li='Ip: ' + user.ip
+                  li='Balance: ' + user.balance
+                  li='FaucetHub BTC address: ' + user.fhub_address
+                  li='Referal link: ' + baseUrl + 'auth/registration?referal=' + user._id
+            .pay-form
+              form
+                .form-group
+                  input(type='number', min='75', placeholder='payout satoshi')
+                .form-group
+                  input(type='text', value=user.fhub_address, disabled='')
+                .form-group
+                  input(type='password', placeholder='current password')
+                .form-group
+                  button(type='submit') Payout
+            br
+            .bottom-advertising.remaining-advertising
+          .about-advertising
+            a.advertising(href='#')
+        -if(referals)
+          .referal-table
+            .table-title
+              h3 Referals users list
+            table.table-fill
+              thead
+                tr
+                  th.text-left Name
+                  th.text-left Satoshi
+              tbody.table-hover
+                each referal in referals
+                  tr
+                    td.text-left=referal.firstName + " " + referal.lastName
+                    td.text-left 50,000.00
 
 
 

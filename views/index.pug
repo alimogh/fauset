@@ -4,9 +4,10 @@ html
     meta(charset='utf-8')
     title=user.username
     meta(http-equiv="X-UA-Compatible", content="ie=edge")
+    script(src="https://www.google.com/recaptcha/api.js" async)
     script(src="/javascript/main.js")
-    link(rel='stylesheet', href='css/font-awesome.css')
-    link(rel='stylesheet', href='css/main.css')
+    link(rel='stylesheet', href='/css/font-awesome.css')
+    link(rel='stylesheet', href='/css/main.css')
   body
     header
       .header-menu
@@ -15,7 +16,7 @@ html
             a(href='#')
               span
                 i.fa.fa-user(aria-hidden='true')
-              |  User 
+              =' ' + user.username + ' '
               span.dropdown-icon
                 i.fa.fa-angle-down(aria-hidden='true')
             ul
@@ -30,7 +31,6 @@ html
             a.advertising(href='#')
           .about-content
             br
-            p Use the button below to claim for free Bitcoin and play games.
             .remaining
               p
                 | You are logged in as 
@@ -41,7 +41,8 @@ html
             .about-content-advertising
             .about-btn
               form(action=baseUrl+"index/claim",method="POST")
-                input#claim(type='submit',value='Claim FREE Bitcoin!') 
+                div.recapcha(class="g-recaptcha", data-sitekey="6LeYbz4UAAAAAJ-BQ_i7ct3PqC-09Wa5paiZl56W")
+                input#claim(type='submit',value='Claim FREE Bitcoin!')
                 input#time(type='hidden', name="time" value=user.lastClaim)
               div#spendtime
               -if(cantclaim)
