@@ -1,18 +1,101 @@
-<!DOCTYPE html>
-html(lang="en")
+doctype html
+html
   head
-    meta(charset="UTF-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(charset='utf-8')
+    title=user.username
     meta(http-equiv="X-UA-Compatible", content="ie=edge")
     script(src="/javascript/main.js")
-    title=user.username
+    link(rel='stylesheet', href='css/font-awesome.css')
+    link(rel='stylesheet', href='css/main.css')
   body
-    h1 Index
-    h4=user.balance
-    a(href="/auth/logout") Logout
-    form(action=baseUrl+"index/claim", method="post")
-      input#claim(type="submit", value="CLAIM")
-      input#time(type="hidden", name="time" value=user.lastClaim)
-    div#spendtime
-    -if(cantclaim)
-      span=cantclaim
+    header
+      .header-menu
+        ul
+          li.dropdown
+            a(href='#')
+              span
+                i.fa.fa-user(aria-hidden='true')
+              |  User 
+              span.dropdown-icon
+                i.fa.fa-angle-down(aria-hidden='true')
+            ul
+              li
+                a(href='/index/settings') Settings
+                a(href="/auth/logout") Logout
+    .main-container
+      .content-wrapper
+        .top-advertising
+        .about-block
+          .about-advertising
+            a.advertising(href='#')
+          .about-content
+            br
+            p Use the button below to claim for free Bitcoin and play games.
+            .remaining
+              p
+                | You are logged in as 
+                span=user.username
+              p
+                | Your balance is 
+                span=user.balance+" satoshi."
+            .about-content-advertising
+            .about-btn
+              form(action=baseUrl+"index/claim",method="POST")
+                input#claim(type='submit',value='Claim FREE Bitcoin!') 
+                input#time(type='hidden', name="time" value=user.lastClaim)
+              div#spendtime
+              -if(cantclaim)
+                span=cantclaim
+            .bottom-advertising.remaining-advertising
+          .about-advertising
+            a.advertising(href='#')
+        .top-advertising
+          a.advertising(href='#')
+        .about-block
+          .about-advertising
+            a.advertising(href='#')
+          .about-content
+            h2 Turbo Bitcoin Faucet
+            h4 Claim 1-5 Satoshi FREE with no time limit!
+            a(href='#') Want more satoshi? Increase your claim amounts by levelling up
+            .about-content-advertising
+              a.advertising(href='#')
+            h3 What is a Bitcoin Faucet?
+            p
+              | A faucet is a website that “drips” free Bitcoin and other crypto currencies to its users in exchange for completing easy tasks
+          .about-advertising
+            a.advertising(href='#')
+        .bottom-advertising
+          a.advertising(href='#')
+        .referral-program
+          h2 Referral Program
+          p Refer users to receive 10% referral commission every time they make a claim!
+          .ref-url
+            h4 Your Ref URL
+            ul
+              li
+                input(type='text', value='http://faucetgame.com/r/17235503/faucet', readonly='')
+              li.twitter
+                a(href='#')
+                  i.fa.fa-twitter(aria-hidden='true')
+                  |  Tweet
+              li.facebook
+                a(href='#')
+                  i.fa.fa-facebook(aria-hidden='true')
+                  |  Share
+              li.google
+                a(href='#')
+                  i.fa.fa-google(aria-hidden='true')
+                  |  +1
+          p
+            span VIP benefits do not take effect on this page
+    footer
+      .footer-copy
+        p FAUCETGAME.COM 2017 	©
+      ul
+        li
+          a(href='#') Terms and Conditions
+        li
+          a(href='#') Privacy Policy
+        li
+          a(href='#') Support

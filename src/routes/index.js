@@ -30,6 +30,7 @@ router.get("/settings", async function (req, res, next) {
   try {
     const user = req.user;
     const referals = await UserModel.find({referal:user._id}).exec();
+    console.dir(referals);
     res.render('settings', {
       user: req.user,
       baseUrl: config.baseUrl,
