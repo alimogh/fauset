@@ -2,3 +2,4 @@ dist
 config
 node_modules
 .vscode
+public/javascript
