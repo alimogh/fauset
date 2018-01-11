@@ -14,8 +14,6 @@ var Clock = function Clock(Enddate) {
     document.getElementById("claim").setAttribute("disabled", "true");
   }, 1000);
 };
+var selectorGetTime = document.getElementById("time");
+Clock(new Date(selectorGetTime.value));
 
-document.addEventListener("DOMContentLoaded", function () {
-  var selectorGetTime = document.getElementById("time");
-  Clock(new Date(selectorGetTime.value));
-});

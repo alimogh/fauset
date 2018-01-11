@@ -62,7 +62,7 @@ app.use(function(req, res, next) {
 app.use(function(error,req, res, next) {
     res.status(500).send(error);
     console.dir(error);
-});
-app.listen(process.env.PORT || 3000, function () {
-    console.log('App listening on port.');
+}); 
+const server = app.listen(process.env.PORT || 3000, function () {
+    console.log('App listening on port '+ server.address().port);
 });

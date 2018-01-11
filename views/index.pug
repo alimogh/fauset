@@ -5,7 +5,7 @@ html
     title=user.username
     meta(http-equiv="X-UA-Compatible", content="ie=edge")
     script(src="https://www.google.com/recaptcha/api.js" async)
-    script(src="/javascript/main.js")
+    script(src="/javascript/main.js" defer)
     link(rel='stylesheet', href='/css/font-awesome.css')
     link(rel='stylesheet', href='/css/main.css')
   body
@@ -40,7 +40,7 @@ html
                 span=user.balance+" satoshi."
             .about-content-advertising
             .about-btn
-              form(action=baseUrl+"index/claim",method="POST")
+              form(action=config.baseUrl+"index/claim",method="POST")
                 div.recapcha(class="g-recaptcha", data-sitekey="6LeYbz4UAAAAAJ-BQ_i7ct3PqC-09Wa5paiZl56W")
                 input#claim(type='submit',value='Claim FREE Bitcoin!')
                 input#time(type='hidden', name="time" value=user.lastClaim)
@@ -56,9 +56,8 @@ html
           .about-advertising
             a.advertising(href='#')
           .about-content
-            h2 Turbo Bitcoin Faucet
-            h4 Claim 1-5 Satoshi FREE with no time limit!
-            a(href='#') Want more satoshi? Increase your claim amounts by levelling up
+            h1 Turbo Bitcoin Faucet
+            h4 Claim 5 satoshi free every 1 minutes!
             .about-content-advertising
               a.advertising(href='#')
             h3 What is a Bitcoin Faucet?
@@ -70,26 +69,27 @@ html
           a.advertising(href='#')
         .referral-program
           h2 Referral Program
-          p Refer users to receive 10% referral commission every time they make a claim!
+          p="Refer users to receive "+ config.claim.percent +"% referral commission every time they make a claim!"
           .ref-url
             h4 Your Ref URL
             ul
               li
-                input(type='text', value='http://faucetgame.com/r/17235503/faucet', readonly='')
-              li.twitter
-                a(href='#')
-                  i.fa.fa-twitter(aria-hidden='true')
-                  |  Tweet
-              li.facebook
-                a(href='#')
-                  i.fa.fa-facebook(aria-hidden='true')
-                  |  Share
-              li.google
-                a(href='#')
-                  i.fa.fa-google(aria-hidden='true')
-                  |  +1
-          p
-            span VIP benefits do not take effect on this page
+                input(type='text', value='Referal Url: ' + config.baseUrl + 'auth/registration?referal=' + user._id, readonly='')
+              
+              //- li.twitter
+              //-   a(href='#')
+              //-     i.fa.fa-twitter(aria-hidden='true')
+              //-     |  Tweet
+              //- li.facebook
+              //-   a(href='#')
+              //-     i.fa.fa-facebook(aria-hidden='true')
+              //-     |  Share
+              //- li.google
+              //-   a(href='#')
+              //-     i.fa.fa-google(aria-hidden='true')
+              //-     |  +1
+          //- p
+          //-   span VIP benefits do not take effect on this page
     footer
       .footer-copy
         p FAUCETGAME.COM 2017 	©

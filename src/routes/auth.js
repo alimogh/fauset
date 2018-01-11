@@ -44,8 +44,8 @@ router.get("/login", NotMastBeLogin, async function (req, res, next) {
 });
 router.post("/registration", NotMastBeLogin, async function (req, res, next) {
   try {
-    req.checkBody('firstName', 'First anme can not be blank').trim();
-    req.checkBody('lastName', 'Last anme can not be blank').trim();
+    req.checkBody('firstName', 'Not more then 24').isLength({max: 24});
+    req.checkBody('lastName', 'Last anme can not be blank').isLength({max: 24});
     req.checkBody('username', 'Username can not be blank').notEmpty().isUnique().withMessage("Username already exists");
     req.checkBody('fhub_address', 'Fauset Hub address can not be blank').notEmpty().isFausetHubAddress().withMessage("Coin address does not belong to an account on FaucetHub.io, please make an account and link your address and try again.");
     req.checkBody('password', 'Password can not be blank').notEmpty().isLength({
@@ -61,7 +61,7 @@ router.post("/registration", NotMastBeLogin, async function (req, res, next) {
     }
     req.checkBody('g-recaptcha-response', 'reCAPTCHA error').isValidreCAPTCHA();
     await req.asyncValidationErrors(true);
-    const user = new UserModel(req.body);
+    const user = new UserModel({...req.body,"referalAddedBalance":0});
     await user.save();
     req.flash('message', "Success registration");
     res.redirect("/auth/login");

@@ -38,18 +38,23 @@ html(lang="en")
                   li='Ip: ' + user.ip
                   li='Balance: ' + user.balance
                   li='FaucetHub BTC address: ' + user.fhub_address
-                  li='Referal link: ' + baseUrl + 'auth/registration?referal=' + user._id
+                  li(style="font-size: 15px;")='Referal Url: ' + baseUrl + 'auth/registration?referal=' + user._id
+            span=message
             .pay-form
-              form
+              form(method="POST" )
                 .form-group
-                  input(type='number', min='75', placeholder='payout satoshi')
+                  span Satoshi
+                  input(type='number', name="satosh" min='5', placeholder='min 5')
                 .form-group
-                  input(type='text', value=user.fhub_address, disabled='')
+                  span Send to
+                  input(type='text', name="address" value=user.fhub_address, readonly="readonly")
                 .form-group
-                  input(type='password', placeholder='current password')
+                  span Secure
+                  input(type='password', name="carrentP" placeholder='Current password')
                 .form-group
                   button(type='submit') Payout
             br
+            span=errors
             .bottom-advertising.remaining-advertising
           .about-advertising
             a.advertising(href='#')
@@ -66,8 +71,24 @@ html(lang="en")
                 each referal in referals
                   tr
                     td.text-left=referal.firstName + " " + referal.lastName
-                    td.text-left 50,000.00
-
-
+                    td.text-left=referal.referalAddedBalance
+        -if(payouts)
+          .referal-table
+            .table-title
+              h3 Payouts list
+            table.table-fill
+              thead
+                tr
+                  th.text-left Address
+                  th.text-left Satoshi
+                  th.text-left Date
+                  th.text-left Payout Hash
+              tbody.table-hover
+                each payout in payouts
+                  tr
+                    td.text-left=payout.address
+                    td.text-left=payout.satosh
+                    td.text-left=payout.creatAt
+                    td.text-left=payout.payout_user_hash
 
 

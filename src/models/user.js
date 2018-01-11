@@ -40,6 +40,10 @@ const UserSchema = new Schema({
     type: Date,
     default: Date.now
   },
+  referalAddedBalance: {
+    type : Number,
+    default: null,
+  },
   referal:{
     type: Schema.Types.ObjectId,
     ref : "UserSchema",

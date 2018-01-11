@@ -50,7 +50,6 @@ table {
 }
 
 table caption, table th, table td {
-    text-align: left;
     vertical-align: middle;
 }
 
@@ -277,8 +276,8 @@ header .header-menu > ul > li.dropdown:hover ul {
     list-style: none;
     margin-bottom: 5px;
 }
-.content-wrapper .about-block .about-content h2 {
-    font-size: 40px;
+.content-wrapper .about-block .about-content h1 {
+    font-size: 45px;
     margin-top: 30px;
     margin-bottom: 15px;
     font-weight: bold;
@@ -459,7 +458,7 @@ header .header-menu > ul > li.dropdown:hover ul {
 }
 
 .content-wrapper .referral-program .ref-url ul li input {
-    width: 400px;
+    width: 700px;
     padding: 8px 12px;
     cursor: default;
     background-color: #f4f6f6;
@@ -516,6 +515,20 @@ header .header-menu > ul > li.dropdown:hover ul {
     border: 1px solid #34495e;
     padding: 45px;
     border-radius: 6px;
+}
+.form-group {
+    display: flex
+}
+.form-group span{
+    height: auto;
+    display: block;
+    margin: 0 0 15px;
+    flex: 0 0 15%;
+    background-color: #b4b6b7;
+    padding: 11px 0px;
+    color: #ffffff;
+    border-bottom-left-radius: 15px;
+    border-top-left-radius: 15px;
 }
 .form-group input {
     outline: 0;
@@ -577,8 +590,8 @@ th {
     border-right: 1px solid #343a45;
     font-size:23px;
     font-weight: 100;
-    padding:24px;
-    text-align:left;
+    padding:10px;
+    text-align:center;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
     vertical-align:middle;
 }
@@ -633,42 +646,19 @@ tr:last-child td:last-child {
 
 td {
     background:#FFFFFF;
-    padding:20px;
-    text-align:left;
+    padding:10px;
     vertical-align:middle;
     font-weight:300;
     font-size:18px;
     text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
     border-right: 1px solid #C1C3D1;
+    text-align: center;
 }
 
 td:last-child {
     border-right: 0px;
 }
 
-th.text-left {
-    text-align: left;
-}
-
-th.text-center {
-    text-align: center;
-}
-
-th.text-right {
-    text-align: right;
-}
-
-td.text-left {
-    text-align: left;
-}
-
-td.text-center {
-    text-align: center;
-}
-
-td.text-right {
-    text-align: right;
-}
 
 /* footer */
 footer {
